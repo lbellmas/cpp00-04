@@ -1,0 +1,27 @@
+NAME	= TriangleArea
+CC		= c++
+CFLAGS	= -Wextra -Werror -Wall -std=c++98
+
+# Todos los .cpp en el directorio actual
+SRC		= main.cpp Fixed.cpp Point.cpp bsp.cpp
+# Genera los .o correspondientes
+OBJ		= $(SRC:.cpp=.o)
+
+all: $(NAME) Makefile
+
+$(NAME): $(OBJ) Fixed.hpp Point.hpp
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+# Regla genérica para compilar .cpp -> .o
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
